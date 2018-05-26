@@ -1,13 +1,16 @@
-import webpack from 'webpack';
 
-export default {
+//Pasar a ES6
+const webpack = require ('webpack');
+const path = require ('path');
+
+module.exports = {
     mode: 'production',
-    entry: './src/index.js',
     devtool: 'source-map',
+    entry: './src/index.js',
     output: {
         filename: 'bundle.js',
-        publicPath: '/',
-        path: `${__dirname}/dist`
+        publicPath: '/dist',
+        path: path.join(__dirname, '/dist')
     },
     module: {
         rules: [
@@ -23,7 +26,9 @@ export default {
         ]
     },
     resolve: {
-        modules: [`${__dirname}/node_modules`]
+        modules: [
+            path.join(__dirname, 'node_modules')
+        ]
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
