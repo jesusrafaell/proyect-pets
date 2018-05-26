@@ -2,6 +2,8 @@
 //Pasar a ES6
 const webpack = require ('webpack');
 const path = require ('path');
+const htmlWepackPlugin = require('html-webpack-plugin');
+const liveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
     mode: 'production',
@@ -21,7 +23,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css']
+                use: ['style-loader', 'css-loader']
             }
         ]
     },
@@ -33,5 +35,11 @@ module.exports = {
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
         contentBase: './dist'
-    }
+    },
+    plugins: [
+        new htmlWepackPlugin({
+            template: './dist/index.html'
+        }),
+        new liveReloadPlugin()
+    ]
 }
