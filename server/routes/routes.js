@@ -3,14 +3,14 @@ import petsController from '../controllers/petsController';
 
 const router = express.Router();
 
-router.get('/', petsController.listPets);
+router.get('/', petsController.findAll);
 
-router.get('/pets/:breed', petsController.listPetsForBeed);
+router.get('/pets/:id', petsController.findOne);
 
-router.post('/pets', petsController.addPet);
+router.post('/pets', petsController.save);
 
-router.put('/pets/:id', petsController.updatePet);
+router.put('/pets/:id', petsController.update);
 
-router.delete('/pets/:id', petsController.delete);
+router.delete('/pets/:id', petsController.deleteOne);
 
 export default router;
