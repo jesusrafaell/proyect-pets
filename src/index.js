@@ -1,13 +1,15 @@
 import React from 'react';
-import createSagaMiddleware from 'redux-saga';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './components/App';
+import store from './store';
 
 //Create saga middleware
-const sagaMiddleware = createSagaMiddleware();
 
 render (
-    <App />,
+		<Provider store={store}>
+    <App />
+		</Provider>,
     document.getElementById('app')
 )
 

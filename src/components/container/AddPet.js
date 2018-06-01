@@ -1,54 +1,45 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import store from '../../store';
 
 class AddPet extends Component {
 	constructor() {
 		super();
-		this.state = {
-			name: '',
-			email: '',
-			age: '',
-			breed: '',
-			weight: '',
-			height: ''
-		};
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.state = {};
 		this.handleOnChange = this.handleOnChange.bind(this);
+		this.addToListPets = this.addToListPets.bind(this);
 	}
 
 	handleOnChange = e => {
-		switch (e.target.name) {
-			case 'name':
-				this.setState({name: e.target.value});
-				break;
-			case 'email':
-				this.setState({email: e.target.value});
-				break;
-			case 'age':
-				this.setState({age: e.target.value});
-				break;
-			case 'breed':
-				this.setState({breed: e.target.value});
-				break;
-			case 'weight':
-				this.setState({weight: e.target.value})
-				break;
-			default:
-				this.setState({height: e.target.value});
-				break;			
-		}
+		this.setState({[e.target.name]: e.target.value}); 			
 	}
 
-	handleSubmit = e => {
+	addToListPets = e => {
 		e.preventDefault();
-		axios.post('/api/pets/', this.state)
-			.then(e => console.log('Send Pet'));
+		axios.post('/api/pets/', {
+			name: this.state.name,
+			email: this.state.email,
+			age: this.state.age,
+			breed: this.state.breed,
+			weight: this.state.weight,
+			height: this.state.height
+		})
+			.then(res => {
+				this.setState({
+					_id: res.data._id
+				});
+				store.dispatch({
+					type: "ADD_TO_LISTPETS",
+					pet: this.state
+				});
+			})
+			.catch(error => console.log(error));
 	}
 
 //action="/api/pets" method="post"
 	render () {
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.addToListPets}>
 			  <div className="form-row align-items-center">
 			    <div className="col-auto">
 			      <label className="sr-only" for="name">Name</label>
@@ -64,7 +55,13 @@ class AddPet extends Component {
 			    </div>
 			    <div class="col-auto">
 			      <label className="sr-only" for="breed">Breed</label>
-			       <input type="text" className="form-control" name="breed" onChange={this.handleOnChange} placeholder="Breed" required/>
+			     	<select className="form-control selectpicker" name="breed" onChange={this.handleOnChange} required>
+						<option>Select a Breed</option>
+						 <option value="Golden">Golden</option>
+						 <option value="Harrier">Harrier</option>
+						 <option value="Pastor Aleman">Pastor Aleman</option>
+						 <option value="Saluki">Saluki</option>
+						 </select>
 			    </div>
 			    <div class="col-auto">
 			      <label className="sr-only" for="weight">Weight</label>
@@ -79,9 +76,10 @@ class AddPet extends Component {
 			    </div>
 			  </div>
 			</form>
-		)
-	};
-
+		);
+	}
+	
 }
+
 
 export default AddPet;

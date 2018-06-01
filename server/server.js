@@ -42,5 +42,5 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 //start server
 app.listen(app.get('port'), () => 
-    console.log(`Server run on port: ${app.get('port')}`)
+    console.log(`listening on port: ${app.get('port')}`)
 );

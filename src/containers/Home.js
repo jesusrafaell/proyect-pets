@@ -13,13 +13,13 @@ class Home extends Component {
             <NavBar />
             <br />
             <div className="container"> 
-              <AddPet />
-              <br />
               <ListPets />
             </div>
         </div>
        ) 
     };
 }
+
+
 
 export default Home;
