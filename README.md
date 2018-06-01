@@ -1,5 +1,7 @@
 ## react-redux-mongodb-nodejs-express
-Install the dependencies
+
+### Install the dependencies
+
 npm install
 
 ### Start the MongoDB server
@@ -10,10 +12,10 @@ The project is preconfigured with a simple development web server. This app run 
 
 npm run server
 
-###### Only Webpack
+#### Only Webpack
 npm run compile
 
-###### Webpack and Server
+#### Webpack and Server
 npm run build
 
 By: @jesusrafaell
