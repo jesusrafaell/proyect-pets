@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import Home from '../containers/Home';
 import Navbar from '../components/Common/Navbar';
 import axios from 'axios';
